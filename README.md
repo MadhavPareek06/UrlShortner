@@ -62,7 +62,7 @@ NODE_ENV=development
 MONGO_URI=mongodb://localhost:27017/urlshortener
 BASE_URL=http://localhost:5000
 CORS_ORIGIN=http://localhost:5173
-JWT_SECRET=your-secret-key
+JWT_SECRET=secrete key
 ```
 
 ## How to Use
