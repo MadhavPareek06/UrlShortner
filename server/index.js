@@ -117,16 +117,22 @@ process.on('SIGINT', () => {
   process.exit(0);
 });
 
-// Connect to MongoDB and start server
-connectDB().then(() => {
+// Connect to MongoDB
+connectDB().catch((err) => {
+  console.error('Failed to connect to MongoDB:', err);
+});
+
+// For Vercel serverless deployment
+if (process.env.NODE_ENV !== 'production') {
+  // Only start server in development
   app.listen(config.PORT, () => {
     console.log(`🚀 Server running on port ${config.PORT}`);
     console.log(`📊 Environment: ${config.NODE_ENV}`);
     console.log(`🌐 CORS origin: ${config.CORS_ORIGIN}`);
     console.log(`🔗 Base URL: ${config.BASE_URL}`);
   });
-}).catch((err) => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
+}
+
+// Export for Vercel
+module.exports = app;
 
