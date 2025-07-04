@@ -36,10 +36,14 @@ export const shortenUrl = async (originalUrl, title = '', description = '', cust
     });
 
     if (response.data.success) {
+      const baseUrl = import.meta.env.PROD
+        ? 'https://urlshortner-9ig2.onrender.com'
+        : 'http://localhost:5000';
+
       return {
         success: true,
         data: response.data.data,
-        shortUrl: `http://localhost:5000/${response.data.data.shortId}`,
+        shortUrl: `${baseUrl}/${response.data.data.shortId}`,
         message: response.data.message
       };
     } else {

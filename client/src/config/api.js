@@ -1,10 +1,15 @@
 // API Configuration
 const getApiBaseUrl = () => {
-  // In production, use the same domain
-  if (import.meta.env.PROD) {
-    return '/api';
+  // Use environment variable if available
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
   }
-  
+
+  // In production, use Render backend
+  if (import.meta.env.PROD) {
+    return 'https://urlshortner-9ig2.onrender.com/api';
+  }
+
   // In development, use localhost
   return 'http://localhost:5000/api';
 };
