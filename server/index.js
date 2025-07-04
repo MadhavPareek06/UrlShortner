@@ -122,9 +122,9 @@ connectDB().catch((err) => {
   console.error('Failed to connect to MongoDB:', err);
 });
 
-// For Vercel serverless deployment
-if (process.env.NODE_ENV !== 'production') {
-  // Only start server in development
+// Start server (for traditional hosting like Render)
+// Only skip for Vercel serverless
+if (process.env.VERCEL !== '1') {
   app.listen(config.PORT, () => {
     console.log(`🚀 Server running on port ${config.PORT}`);
     console.log(`📊 Environment: ${config.NODE_ENV}`);
